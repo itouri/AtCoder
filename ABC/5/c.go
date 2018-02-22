@@ -1,7 +1,5 @@
 package main
 
-// Fail 54'48
-
 import (
 	"bufio"
 	"fmt"
@@ -44,14 +42,22 @@ func main() {
 		return
 	}
 
+	j := 0
 	for i := 0; i < n; i++ {
-		if i == m {
-			break
-		}
-		if b[i] < a[i] || a[i]+t < b[i] {
+		// switch の中の break でずっと立ち止まってた
+		switch {
+		case a[i]+t < b[j]:
+			continue
+		case b[j] < a[i]:
 			fmt.Println("no")
 			return
+		default:
+			j++
+			if j == m {
+				fmt.Println("yes")
+				return
+			}
 		}
 	}
-	fmt.Println("yes")
+	fmt.Println("no")
 }

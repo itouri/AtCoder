@@ -1,41 +1,21 @@
-def add_grid(I, J, x, y):
-    v = 0
-    for i in range(I, I+y):
-        for j in range(J, J+x):
-            v = v + D[i][j]
-    return v
-
-N = input()
-D = []
+N = int(input())
+D = [0]*N
 for i in range(N):
-    D.append(map(int, raw_input().split()))
-Q = input()
-P = []
+    D[i] = [int(x) for x in input().split()]
+Q = int(input())
+P = [0]*Q
 for i in range(Q):
-    P.append(input())
+    P[i] = int(input())
 
-query = []
-for i in range(N):
-    for j in range(i, N):
-        query.append([i+1, j+1])
-
+query = [[i,j] for i in range(1,N+1) for j in range(1,N+1)]
 max_values = [0 for i in range(N*N+1)]
+
 for q in query:
-    x = q[0]
-    y = q[1]
+    x, y = q[0], q[1]
     for i in range(N-y+1):
         for j in range(N-x+1):
-            v = add_grid(i, j, x, y)
-            if v > max_values[x*y]:
-                max_values[x*y] = v
-max = 0
-for i in range(len(max_values)):
-    if max_values[i] > max:
-        max = max_values[i]
-    else:
-        max_values[i] = max
+            v = sum([D[k][l] for k in range(i, i+y) for l in range(j, j+x)])
+            max_values[x*y] = max(v, max_values[x*y])
 
-# search
 for p in P:
-    #print(str(max_values))
-    print(max_values[p])
+    print(max(max_values[:p+1]))

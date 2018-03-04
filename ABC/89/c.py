@@ -11,25 +11,15 @@ for i in range(N):
     if s[0] in march:
         S[s[0]] += 1
 
-aS = []
-for s in S.values():
-    if s != 0:
-        aS.append(s)
+aS = [s for s in S.values() if s != 0]
 
-mul = 1
+mul = functools.reduce(lambda a, x: a * x, aS, 1)
 ans = 0
-sum = 0
-for s in aS:
-    mul = mul * s
-    sum += 1
-if sum == 3:
+if len(aS) == 3:
     ans = mul
-elif sum == 4:
-    # ans = mul * 4
-    for s in aS:
-        ans = ans + mul / s
-elif sum == 5:
-    # ans = mul * 5
+elif len(aS) == 4:
+    ans = functools.reduce(lambda a, x: a + mul/x, aS, 0)
+elif len(aS) == 5:
     for i in range(5):
         for j in range(i+1,5):
             ans = ans + mul / aS[i] / aS[j]

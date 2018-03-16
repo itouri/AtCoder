@@ -1,7 +1,5 @@
 N = int(input())
-D = [0]*N
-for i in range(N):
-    D[i] = [int(x) for x in input().split()]
+D = [[int(x) for x in input().split()] for i in range(N)]
 Q = int(input())
 P = [int(input()) for i in range(Q)]
 

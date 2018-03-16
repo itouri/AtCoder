@@ -14,6 +14,7 @@ for i in range(len(A)):
         for j in range(len(A[i])):
             sA[A[i][j]] = [i, j]
 
+# H*W に +1 がなくってしばらく考えてた 
 for i in range(D+1, H*W+1):
     d[i] = d[i-D] + abs(sA[i][0]-sA[i-D][0]) + abs(sA[i][1]-sA[i-D][1])
 
